@@ -2,71 +2,59 @@
 import Image from "next/image";
 import { FiX, FiMic, FiSend } from "react-icons/fi";
 import { BsQrCodeScan } from "react-icons/bs";
-import logo from "./download.jpeg";
+import logo from './download.jpeg'
 export default function ChatbotWidget({ onClose }) {
   return (
-    <div className="fixed bottom-6 right-6 w-[400px] max-w-full bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200 flex flex-col">
-      {/* Header with Close Button */}
-      <div className="bg-gradient-to-r from-orange-400 to-orange-500 p-4 relative">
-        <button onClick={onClose} className="absolute top-3 right-3 bg-white bg-opacity-20 rounded-full w-8 h-8 flex items-center justify-center hover:bg-opacity-30 transition-colors text-white">
-          <FiX size={18} />
-        </button>
+    <div className="relative w-[400px] max-w-full bg-white shadow-xl rounded-xl overflow-hidden border border-gray-200">
+      {/* Close Button */}
+      <button onClick={onClose} className="absolute top-2 right-2 bg-gray-100 rounded-full w-8 h-8 flex items-center justify-center hover:bg-gray-200 transition-colors">
+        <FiX size={16} />
+      </button>
 
-        <div className="flex items-center gap-3">
-          {/* Avatar Image */}
-          <div className="w-12 h-12 rounded-full bg-white flex items-center justify-center shadow-md">
-            <Image
-              src={logo} // Replace with your robot image path
-              alt="AI Assistant"
-              width={48}
-              height={48}
-              className="w-10 h-10 object-contain"
-            />
-          </div>
-
-          {/* Title Text */}
-          <div className="text-left text-white">
-            <h2 className="text-lg font-semibold">Travel Assistant</h2>
-            <p className="text-sm opacity-90">Online • Ready to help</p>
-          </div>
-        </div>
+      {/* Avatar Image */}
+      <div className="w-full h-56 bg-gray-100 flex items-center justify-center">
+        <Image
+          src={logo}// Replace with your robot image
+          alt="AI Assistant"
+          width={120}
+          height={120}
+          className="w-32 h-32 object-contain rounded-full border-4 border-white shadow-md"
+        />
       </div>
 
-      {/* Welcome Message */}
-      <div className="p-4 bg-orange-50">
-        <div className="bg-white rounded-lg p-3 shadow-sm max-w-[80%]">
-          <p className="text-sm text-gray-800">Hi there! 👋 I'm your Sonoma travel assistant. How can I help you today?</p>
-        </div>
+      {/* Text */}
+      <div className="text-center p-4 border-b">
+        <h2 className="text-xl font-medium">
+          Hi, I'm <span className="text-orange-500 font-bold">Travel Assistant</span>,
+        </h2>
+        <p className="text-gray-700">Ready to Assist</p>
       </div>
 
-      {/* Quick Action Buttons */}
-      <div className="grid grid-cols-2 gap-3 px-4 py-3 bg-gray-50">
-        {["Help me plan my Sonoma itinerary", "How can I explore Sonoma like a local", "Find restaurants or Insider Pass details", "Tell me about spas or outdoor sports"].map((text, index) => (
-          <button key={index} className="border text-sm border-gray-200 p-2 rounded-lg hover:bg-white transition-all text-left bg-white shadow-sm hover:shadow-md text-gray-700 hover:border-orange-300">
-            {text}
-          </button>
-        ))}
+      {/* Buttons - 2 columns */}
+      <div className="grid grid-cols-2 gap-3 px-4 py-4">
+        <button className="border text-sm border-gray-300 p-3 rounded-md hover:bg-gray-50 transition text-left h-16">Help me plan my Sonoma itinerary</button>
+        <button className="border text-sm border-gray-300 p-3 rounded-md hover:bg-gray-50 transition text-left h-16">Find restaurants or Insider Pass details</button>
+        <button className="border text-sm border-gray-300 p-3 rounded-md hover:bg-gray-50 transition text-left h-16">How can I explore Sonoma like a local</button>
+        <button className="border text-sm border-gray-300 p-3 rounded-md hover:bg-gray-50 transition text-left h-16">Tell me about spas or outdoor sports</button>
       </div>
 
       {/* QR Section */}
-      <div className="flex items-center justify-between bg-orange-50 p-3 border-t">
-        <div className="text-left">
-          <p className="text-sm font-medium text-gray-700">Continue on your phone</p>
-          <p className="text-xs text-gray-500">Scan QR code to chat on mobile</p>
-        </div>
-        <div className="bg-white p-1 rounded border border-gray-200 flex items-center justify-center">
-          <BsQrCodeScan size={24} className="text-orange-500" />
+      <div className="flex flex-col items-center bg-gray-50 p-4 border-t">
+        <p className="mb-2 text-gray-800 text-sm text-center">
+          Continue on phone
+          <br />
+          Scan QR
+        </p>
+        <div className="bg-white p-2 rounded border border-gray-200">
+          <BsQrCodeScan size={40} className="text-gray-600" />
         </div>
       </div>
 
       {/* Chat Input */}
-      <div className="flex items-center gap-2 p-3 bg-white border-t">
-        <input type="text" placeholder="Type your question..." className="flex-1 border border-gray-200 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-200 focus:border-orange-300" />
-        <button className="text-orange-500 hover:text-orange-600 transition-colors">
+      <div className="flex items-center border-t p-3 gap-2 bg-white">
+        <input type="text" placeholder="Type or Ask me something" className="flex-1 border rounded-full px-4 py-2 text-sm focus:outline-none focus:border-orange-300" />
+        <button className="text-orange-500 hover:text-orange-600">
           <FiMic size={20} />
-        </button>
-        <button className="bg-orange-500 text-white p-2 rounded-full hover:bg-orange-600 transition-colors">
-          <FiSend size={16} />
         </button>
       </div>
     </div>

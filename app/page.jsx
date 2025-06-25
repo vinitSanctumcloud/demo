@@ -6,7 +6,7 @@ export default function Home() {
   const [open, setOpen] = useState(false);
 
   return (
-    <main className="w-[400px] h-[590px] flex items-center justify-center  rounded-xl shadow-md">
+    <main className="w-[400px] h-[690px] flex items-center justify-center  rounded-xl shadow-md mx-auto mt-[10%]">
       <ChatbotWidget />
     </main>
   );

@@ -17,7 +17,7 @@ export default function ChatbotWidget() {
     if (!input.trim()) return;
     setMessages((prev) => [...prev, { type: "user", text: input }]);
     setInput("");
-    setChatView(true); // Switch to chat view
+    setChatView(true);
 
     setTimeout(() => {
       setMessages((prev) => [...prev, { type: "bot", text: dummyBotResponse }]);
@@ -31,7 +31,7 @@ export default function ChatbotWidget() {
   }, [messages]);
 
   return (
-    <div className="relative w-[400px] max-w-full bg-orange-50  rounded-xl overflow-hidden border border-orange-100">
+    <div className="relative w-[400px] h-[690px] max-w-full bg-orange-50 rounded-xl overflow-hidden border border-orange-100 flex flex-col">
       <style>{`
         .message-bubble {
           padding: 0.75rem;
@@ -56,13 +56,13 @@ export default function ChatbotWidget() {
       {!chatView ? (
         <div className="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-300 flex items-center justify-center">
           <div className="relative w-28 h-28">
-            <Image src={logo} alt="AI Assistant" fill className="object-contain rounded-full " />
+            <Image src={logo} alt="AI Assistant" fill className="object-contain rounded-full" />
           </div>
         </div>
       ) : (
-        <div className="flex items-center gap-3 px-4 py-3 bg-orange-100 border-b border-orange-200 ">
+        <div className="h-20 bg-orange-100 border-b border-orange-200 flex items-center gap-3 px-4 py-3">
           <div className="relative w-10 h-10">
-            <Image src={logo} alt="AI Assistant" fill className="object-cover rounded-full " />
+            <Image src={logo} alt="AI Assistant" fill className="object-cover rounded-full" />
           </div>
           <div>
             <h2 className="text-md font-semibold text-orange-700">Sonoma Guide</h2>
@@ -85,7 +85,7 @@ export default function ChatbotWidget() {
       <div
         id="chatDisplay"
         ref={chatDisplayRef}
-        className="flex flex-col gap-2 px-4 py-4 overflow-y-auto h-48"
+        className="flex-1 flex flex-col gap-2 px-4 py-4 overflow-y-auto"
         style={{ backgroundColor: "#fffaf0" }}
       >
         {!chatView ? (

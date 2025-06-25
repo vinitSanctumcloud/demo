@@ -31,7 +31,7 @@ export default function ChatbotWidget() {
   }, [messages]);
 
   return (
-    <div className="relative w-[400px] max-w-full bg-orange-50 shadow-lg rounded-xl overflow-hidden border border-orange-100">
+    <div className="relative w-[400px] max-w-full bg-orange-50  rounded-xl overflow-hidden border border-orange-100">
       <style>{`
         .message-bubble {
           padding: 0.75rem;
@@ -56,13 +56,13 @@ export default function ChatbotWidget() {
       {!chatView ? (
         <div className="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-300 flex items-center justify-center">
           <div className="relative w-28 h-28">
-            <Image src={logo} alt="AI Assistant" fill className="object-contain rounded-full shadow-md" />
+            <Image src={logo} alt="AI Assistant" fill className="object-contain rounded-full " />
           </div>
         </div>
       ) : (
         <div className="flex items-center gap-3 px-4 py-3 bg-orange-100 border-b border-orange-200 ">
           <div className="relative w-10 h-10">
-            <Image src={logo} alt="AI Assistant" fill className="object-cover rounded-full shadow" />
+            <Image src={logo} alt="AI Assistant" fill className="object-cover rounded-full " />
           </div>
           <div>
             <h2 className="text-md font-semibold text-orange-700">Sonoma Guide</h2>
@@ -128,7 +128,7 @@ export default function ChatbotWidget() {
             <br />
             <span className="text-orange-600 font-medium">Scan QR</span>
           </p>
-          <div className="bg-white p-2 rounded-lg border border-orange-200 shadow-sm">
+          <div className="bg-white p-2 rounded-lg border border-orange-200 ">
             <BsQrCodeScan size={40} className="text-orange-500" />
           </div>
         </div>

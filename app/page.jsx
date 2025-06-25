@@ -6,7 +6,7 @@ export default function Home() {
   const [open, setOpen] = useState(false);
 
   return (
-    <main className="min-h-screen flex items-center justify-center">
+    <main className="min-h-screen flex items-center justify-center ">
       
 
       <ChatbotWidget />

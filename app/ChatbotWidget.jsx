@@ -54,7 +54,7 @@ export default function ChatbotWidget() {
 
       {/* Header */}
       {!chatView ? (
-        <div className="w-full h-56 bg-gradient-to-br from-orange-100 to-orange-300 flex items-center justify-center">
+        <div className="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-300 flex items-center justify-center">
           <div className="relative w-28 h-28">
             <Image src={logo} alt="AI Assistant" fill className="object-contain rounded-full shadow-md" />
           </div>
@@ -85,7 +85,7 @@ export default function ChatbotWidget() {
       <div
         id="chatDisplay"
         ref={chatDisplayRef}
-        className="flex flex-col gap-2 px-4 py-4 overflow-y-auto h-64"
+        className="flex flex-col gap-2 px-4 py-4 overflow-y-auto h-48"
         style={{ backgroundColor: "#fffaf0" }}
       >
         {!chatView ? (

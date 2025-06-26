@@ -1,159 +1,94 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
-import { FiMic } from "react-icons/fi";
-import { BsSend, BsQrCodeScan } from "react-icons/bs";
-import logo from "./download.jpeg";
+import logo from "./logo.jpeg";
+import { FiSend } from "react-icons/fi";
+import { FaMicrophone } from "react-icons/fa6";
 
-export default function ChatbotWidget() {
-  const [messages, setMessages] = useState([]);
+const AvatarAssistant = () => {
   const [input, setInput] = useState("");
-  const [chatView, setChatView] = useState(false);
-  const chatDisplayRef = useRef(null);
+  const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const dummyBotResponse = "Thanks for your message. Here's a suggestion: Check out the local spa or the wine tasting tour! 🍷";
-
-  const handleSendMessage = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
-    setMessages((prev) => [...prev, { type: "user", text: input }]);
-    setInput("");
-    setChatView(true);
 
-    setTimeout(() => {
-      setMessages((prev) => [...prev, { type: "bot", text: dummyBotResponse }]);
-    }, 600);
+    setLoading(true);
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt: input }),
+      });
+
+      const data = await res.json();
+      setResponse(data.message);
+    } catch (err) {
+      console.error(err);
+      setResponse("Sorry, something went wrong.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  useEffect(() => {
-    if (chatDisplayRef.current) {
-      chatDisplayRef.current.scrollTop = chatDisplayRef.current.scrollHeight;
-    }
-  }, [messages]);
-
   return (
-    <div className="relative w-[400px] h-[690px] max-w-full bg-orange-50 rounded-xl overflow-hidden border border-orange-100 flex flex-col">
-      <style>{`
-        .message-bubble {
-          padding: 0.75rem;
-          border-radius: 1rem;
-          max-width: 80%;
-          word-wrap: break-word;
-          margin-bottom: 0.5rem;
-        }
-        .user-msg {
-          background-color: #fed7aa;
-          align-self: flex-end;
-          color: #111;
-        }
-        .bot-msg {
-          background-color: #fff;
-          align-self: flex-start;
-          color: #222;
-        }
-      `}</style>
+    <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden mt-6 border border-gray-200 p-4 sm:p-6 h-[90vh] flex flex-col">
+      {/* Avatar Image */}
+      <div className="w-full h-48 sm:h-84 relative rounded-xl overflow-hidden">
+        <Image src={logo} alt="Avatar" fill className="object-cover" />
+      </div>
 
-      {/* Header */}
-      {!chatView ? (
-        <div className="w-full h-32 bg-gradient-to-br from-orange-100 to-orange-300 flex items-center justify-center">
-          <div className="relative w-28 h-28">
-            <Image src={logo} alt="AI Assistant" fill className="object-contain rounded-full" />
-          </div>
-        </div>
-      ) : (
-        <div className="h-20 bg-orange-100 border-b border-orange-200 flex items-center gap-3 px-4 py-3">
-          <div className="relative w-10 h-10">
-            <Image src={logo} alt="AI Assistant" fill className="object-cover rounded-full" />
-          </div>
-          <div>
-            <h2 className="text-md font-semibold text-orange-700">Sonoma Guide</h2>
-            <p className="text-xs text-gray-600">AI Assistant</p>
-          </div>
-        </div>
-      )}
+      {/* Content Scrollable */}
+      <div className="flex-1 overflow-y-auto mt-4 px-1 sm:px-4">
+        <h2 className="text-center text-lg sm:text-xl font-semibold text-gray-800">
+          Hi, I'm <span className="text-orange-500">{`{Avatar Name}`}</span>,<br />
+          <span className="font-normal text-gray-700">Ready to Assist</span>
+        </h2>
 
-      {/* Greeting */}
-      {!chatView && (
-        <div className="text-center p-4 border-b border-orange-100">
-          <h2 className="text-xl font-medium text-gray-800">
-            Hi, I'm <span className="text-orange-600 font-semibold">Sonoma Guide</span>,
-          </h2>
-          <p className="text-gray-500 mt-1">Ready to Assist</p>
+        {/* Predefined Buttons */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-6">
+          {["Help me plan my Sonoma itinerary", "How can I explore Sonoma like a local", "Find restaurants or Insider Pass details", "Tell me about spas or outdoor sports"].map((text) => (
+            <button key={text} onClick={() => setInput(text)} className="border border-gray-300 rounded-md py-2 px-4 text-sm hover:bg-gray-100 cursor-pointer">
+              {text}
+            </button>
+          ))}
         </div>
-      )}
 
-      {/* Chat Display */}
-      <div
-        id="chatDisplay"
-        ref={chatDisplayRef}
-        className="flex-1 flex flex-col gap-2 px-4 py-4 overflow-y-auto"
-        style={{ backgroundColor: "#fffaf0" }}
-      >
-        {!chatView ? (
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              "Help me plan my Sonoma itinerary",
-              "Find restaurants or Insider Pass details",
-              "Explore Sonoma like a local",
-              "Tell me about spas or outdoor sports",
-            ].map((text, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setInput(text);
-                  setTimeout(() => handleSendMessage(), 200);
-                }}
-                className="border border-orange-200 bg-white text-sm p-3 rounded-lg hover:border-orange-300 hover:bg-orange-100 transition-all text-left text-gray-700 hover:text-orange-700"
-              >
-                {text}
-              </button>
-            ))}
+        {/* QR Code for Desktop Only */}
+        <div className="mt-6 p-4 bg-orange-100 rounded-md items-center gap-6 justify-center mx-auto hidden md:flex w-fit">
+          <p className="text-sm text-gray-700 text-center">
+            Continue on phone
+            <br />
+            Scan QR
+          </p>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://example.com" alt="QR Code" className="w-16 h-16" />
+        </div>
+
+        {/* Chat Response */}
+        {response && (
+          <div className="mt-6 bg-gray-50 border rounded-lg p-4 text-left text-sm text-gray-800">
+            <strong className="text-orange-500">AI:</strong> {loading ? "Thinking..." : response}
           </div>
-        ) : (
-          messages.map((msg, i) => (
-            <div
-              key={i}
-              className={`message-bubble ${msg.type === "user" ? "self-end user-msg" : "self-start bot-msg"}`}
-            >
-              {msg.text}
-            </div>
-          ))
         )}
       </div>
 
-      {/* QR Section */}
-      {!chatView && (
-        <div className="flex flex-col items-center bg-orange-100 p-4 border-t border-orange-200">
-          <p className="mb-2 text-gray-700 text-sm text-center">
-            Continue on phone
-            <br />
-            <span className="text-orange-600 font-medium">Scan QR</span>
-          </p>
-          <div className="bg-white p-2 rounded-lg border border-orange-200 ">
-            <BsQrCodeScan size={40} className="text-orange-500" />
-          </div>
-        </div>
-      )}
-
       {/* Chat Input */}
-      <div className="flex items-center border-t border-orange-100 p-3 gap-1 bg-orange-50">
-        <input
-          type="text"
-          placeholder="Type or Ask me something..."
-          className="flex-1 border border-orange-200 rounded-full px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-orange-100 focus:border-orange-300 text-gray-700 placeholder-gray-400"
-          value={input}
-          onChange={(e) => setInput(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && handleSendMessage()}
-        />
-        <button className="text-orange-500 hover:text-orange-600 transition-colors p-2">
-          <FiMic size={20} />
-        </button>
-        <button
-          className="text-orange-500 hover:text-orange-600 transition-colors p-2 bg-orange-100 rounded-full flex items-center justify-center"
-          onClick={handleSendMessage}
-        >
-          <BsSend size={20} />
+      <div className="mt-4 sm:mt-6 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        {/* Input box */}
+        <div className="flex flex-1 bg-gray-200 rounded-full px-4 py-2 items-center gap-2">
+          <input type="text" value={input} onChange={(e) => setInput(e.target.value)} placeholder="Type or Ask me something" className="flex-1 bg-transparent text-sm text-gray-800 placeholder-gray-500 focus:outline-none" />
+          <button onClick={handleSend} disabled={loading} className="bg-orange-400 cursor-pointer hover:bg-orange-500 text-white p-2 rounded-full flex items-center justify-center">
+            <FiSend className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Mic button */}
+        <button className="bg-orange-400 hover:bg-orange-500 text-white p-3 rounded-full flex items-center justify-center cursor-pointer">
+          <FaMicrophone className="w-4 h-4" />
         </button>
       </div>
     </div>
   );
-}
+};
+
+export default AvatarAssistant;

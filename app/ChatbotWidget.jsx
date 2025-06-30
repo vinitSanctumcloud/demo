@@ -32,7 +32,7 @@ const AvatarAssistant = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden mt-6 border border-gray-200 p-4 sm:p-6 h-[90vh] flex flex-col">
+    <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden mt-6 border border-gray-200 p-4 sm:p-6 h-[90vh] flex flex-col">
       {/* Avatar Image */}
       <div className="w-full h-48 sm:h-84 relative rounded-xl overflow-hidden">
         <Image src={logo} alt="Avatar" fill className="object-cover" />
@@ -55,7 +55,7 @@ const AvatarAssistant = () => {
         </div>
 
         {/* QR Code for Desktop Only */}
-        <div className="mt-6 p-4 bg-orange-100 rounded-md items-center gap-6 justify-center mx-auto hidden md:flex w-fit">
+        <div className="mt-6 p-4 bg-orange-50 rounded-md items-center gap-6 justify-center mx-auto hidden md:flex w-fit">
           <p className="text-sm text-gray-700 text-center">
             Continue on phone
             <br />

@@ -1,7 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
-import logo from "./logo.jpeg";
 import { FiSend } from "react-icons/fi";
 import { FaMicrophone } from "react-icons/fa6";
 
@@ -32,10 +30,21 @@ const AvatarAssistant = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden mt-6 border border-gray-200 p-4 sm:p-6 h-[90vh] flex flex-col">
-      {/* Avatar Image */}
-      <div className="w-full h-48 sm:h-84 relative rounded-xl overflow-hidden">
-        <Image src={logo} alt="Avatar" fill className="object-cover" />
+    <div className="max-w-lg mx-auto bg-white rounded-xl shadow-lg overflow-hidden mt-6 border border-gray-200 p-4 sm:p-6 h-[90vh] flex flex-col">
+      {/* Media Container */}
+      <div className="w-full h-[60%] relative rounded-xl overflow-hidden">
+        <video
+          src="/video.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          controls={false}
+          className="w-full h-full object-cover"
+          onError={(e) => {
+            console.error("Video failed to load:", e);
+          }}
+        />
       </div>
 
       {/* Content Scrollable */}
@@ -52,16 +61,6 @@ const AvatarAssistant = () => {
               {text}
             </button>
           ))}
-        </div>
-
-        {/* QR Code for Desktop Only */}
-        <div className="mt-6 p-4 bg-orange-50 rounded-md items-center gap-6 justify-center mx-auto hidden md:flex w-fit">
-          <p className="text-sm text-gray-700 text-center">
-            Continue on phone
-            <br />
-            Scan QR
-          </p>
-          <img src="https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=https://example.com" alt="QR Code" className="w-16 h-16" />
         </div>
 
         {/* Chat Response */}

@@ -3,8 +3,8 @@ import { FiSend } from "react-icons/fi";
 import { FaMicrophone, FaBell } from "react-icons/fa";
 
 const ChatWidget = ({
-  initialHeight = "600px",
-  initialWidth = "350px",
+  initialHeight = "500px",
+  initialWidth = "300px",
   assistantImage = "https://via.placeholder.com/150",
   welcomeMessage = "I'm ready to help you shop the looks you love",
   quickPrompts = [

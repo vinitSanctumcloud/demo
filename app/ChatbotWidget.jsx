@@ -131,7 +131,7 @@ const ChatWidget = ({
           {messages.map((message, index) => (
             <div 
               key={index} 
-              className={`flex items-start mb-3 p-4 ${message.sender === "user" ? "justify-end" : "justify-start"}`}
+              className={`flex items-start mb-3 p-2 ${message.sender === "user" ? "justify-end" : "justify-start"}`}
             >
               {message.sender === "assistant" && (
                 <div className="w-8 h-8 rounded-full overflow-hidden mx-2">
@@ -167,7 +167,7 @@ const ChatWidget = ({
 
           {/* Confirmation Message */}
           {showConfirmation && (
-            <div className="flex justify-start items-start mb-3 p-4">
+            <div className="flex justify-start items-start mb-3 p-2">
               <div className="w-8 h-8 rounded-full overflow-hidden mx-2">
                 <img 
                   src={assistantImage} 

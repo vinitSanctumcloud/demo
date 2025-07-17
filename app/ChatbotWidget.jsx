@@ -3,8 +3,8 @@ import { FiSend } from "react-icons/fi";
 import { FaMicrophone, FaBell } from "react-icons/fa";
 
 const ChatWidget = ({
-  initialHeight = "500px",
-  initialWidth = "300px",
+  initialHeight = "510px",
+  initialWidth = "340px",
   assistantImage = "https://via.placeholder.com/150",
   welcomeMessage = "I'm ready to help you shop the looks you love",
   quickPrompts = [
@@ -100,7 +100,7 @@ const ChatWidget = ({
 
         {/* Profile Image */}
         {showProfileImage && (
-          <div className="relative mx-auto w-24 h-24 mb-4 mt-6">
+          <div className="relative mx-auto w-24 h-24 mb-4 mt-2">
             <div className="w-full h-full rounded-full border-2 border-white shadow-md overflow-hidden bg-gray-100">
               <img 
                 src={assistantImage} 
@@ -120,7 +120,7 @@ const ChatWidget = ({
 
         {/* Welcome Message */}
         {showWelcome && (
-          <p className="text-sm text-gray-600 px-3 font-medium mt-1 text-center w-48 mx-auto">
+          <p className="text-sm text-gray-600 px-3 font-medium mt-1 text-center w-48 mx-auto mb-5">
             {welcomeMessage}
           </p>
         )}
@@ -208,7 +208,7 @@ const ChatWidget = ({
 
         {/* Quick Action Buttons */}
         {showPrompts && (
-          <div className="space-y-2 mb-32 px-3">
+          <div className="space-y-2 mb-20 px-3">
             {quickPrompts.map((prompt, index) => (
               <button 
                 key={index}

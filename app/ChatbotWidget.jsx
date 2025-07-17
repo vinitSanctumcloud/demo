@@ -5,7 +5,7 @@ import { FaMicrophone, FaBell } from "react-icons/fa";
 const ChatWidget = ({
   initialHeight = "510px",
   initialWidth = "340px",
-  assistantImage = "https://via.placeholder.com/150",
+  assistantImage = "https://plus.unsplash.com/premium_photo-1681943259296-4c64c027cd55?q=80&w=784&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   welcomeMessage = "I'm ready to help you shop the looks you love",
   quickPrompts = [
     "Where are loafers from?",
@@ -134,7 +134,7 @@ const ChatWidget = ({
               className={`flex items-start mb-3 p-4 ${message.sender === "user" ? "justify-end" : "justify-start"}`}
             >
               {message.sender === "assistant" && (
-                <div className="w-8 h-8 rounded-full overflow-hidden mr-2 ml-2">
+                <div className="w-8 h-8 rounded-full overflow-hidden mx-2">
                   <img 
                     src={assistantImage} 
                     alt="Assistant" 

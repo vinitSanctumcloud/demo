@@ -126,15 +126,15 @@ const ChatWidget = ({
         )}
 
         {/* Chat Container */}
-        <div className="flex-grow overflow-y-auto px-2 no-scrollbar">
+        <div className="flex-grow overflow-y-auto px-4no-scrollbar">
           {/* Chat Messages */}
           {messages.map((message, index) => (
             <div 
               key={index} 
-              className={`flex items-start mb-3 ${message.sender === "user" ? "justify-end" : "justify-start"}`}
+              className={`flex items-start mb-3 p-4 ${message.sender === "user" ? "justify-end" : "justify-start"}`}
             >
               {message.sender === "assistant" && (
-                <div className="w-8 h-8 rounded-full overflow-hidden mr-2">
+                <div className="w-8 h-8 rounded-full overflow-hidden mr-2 ml-2">
                   <img 
                     src={assistantImage} 
                     alt="Assistant" 
@@ -168,7 +168,7 @@ const ChatWidget = ({
           {/* Confirmation Message */}
           {showConfirmation && (
             <div className="flex justify-start items-start mb-3">
-              <div className="w-8 h-8 rounded-full overflow-hidden mr-2">
+              <div className="w-8 h-8 rounded-full overflow-hidden mx-2">
                 <img 
                   src={assistantImage} 
                   alt="Assistant" 

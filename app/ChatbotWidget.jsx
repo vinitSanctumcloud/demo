@@ -126,7 +126,7 @@ const ChatWidget = ({
         )}
 
         {/* Chat Container */}
-        <div className="flex-grow overflow-y-auto px-4no-scrollbar">
+        <div className="flex-grow overflow-y-auto px-4 no-scrollbar">
           {/* Chat Messages */}
           {messages.map((message, index) => (
             <div 
@@ -167,7 +167,7 @@ const ChatWidget = ({
 
           {/* Confirmation Message */}
           {showConfirmation && (
-            <div className="flex justify-start items-start mb-3">
+            <div className="flex justify-start items-start mb-3 p-4">
               <div className="w-8 h-8 rounded-full overflow-hidden mx-2">
                 <img 
                   src={assistantImage} 
@@ -262,8 +262,11 @@ const ChatWidget = ({
         .no-scrollbar {
           -ms-overflow-style: none;
           scrollbar-width: none;
+          overflow: -moz-scrollbars-none;
         }
         .no-scrollbar::-webkit-scrollbar {
+          width: 0 !important;
+          height: 0 !important;
           display: none;
         }
       `}</style>

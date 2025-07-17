@@ -71,7 +71,7 @@ const ChatWidget = () => {
 
   return (
     <div className="w-full max-w-md mx-auto p-4 font-sans">
-      <div className="relative bg-white rounded-2xl shadow-xl p-6 pt-5 text-center border border-gray-200 overflow-hidden h-[80vh] flex flex-col">
+      <div className="relative bg-white rounded-2xl shadow-xl p-6 pt-5 text-center border border-gray-200 overflow-hidden h-full flex flex-col">
         {/* Notification Bell */}
         <div className="absolute top-4 left-4">
           <div className="relative">

@@ -72,7 +72,7 @@ const ChatWidget = ({ initialHeight = "90vh", initialWidth = "90vw", assistantIm
     <>
       {!isWidgetVisible && (
         <div className="fixed bottom-4 right-4 z-50 md:bottom-6 md:right-6">
-          <button onClick={() => setIsWidgetVisible(true)} className="w-16 h-16 rounded-full overflow-hidden shadow-lg border-2 border-white bg-gray-100 hover:shadow-xl transition-all duration-200 focus:outline-none md:w-20 md:h-20" aria-label="Open chat widget">
+          <button onClick={() => setIsWidgetVisible(true)} className="w-24 h-24 rounded-full overflow-hidden shadow-lg border-2 border-white bg-gray-100 hover:shadow-xl transition-all duration-200 focus:outline-none md:w-20 md:h-20" aria-label="Open chat widget">
             <img src={assistantImage} alt="Assistant" className="w-full h-full object-cover" />
           </button>
         </div>
@@ -86,60 +86,61 @@ const ChatWidget = ({ initialHeight = "90vh", initialWidth = "90vw", assistantIm
             </button>
 
             {showProfileImage && (
-              <div className="relative w-full h-24 p-4 mt-1 md:h-32">
-                <div className="w-20 h-20 mx-auto border-2 border-white shadow-md overflow-hidden bg-gray-100 rounded-full md:w-24 md:h-24">
-                  <img src={assistantImage} alt="Assistant" className="w-full h-full object-cover rounded-full" />
+              <div className="relative w-full h-52 p-4 mt-1 md:h-64">
+                <div className="w-54 h-54 mx-auto border-2 border-white shadow-md overflow-hidden bg-gray-100 rounded-full md:w-54 md:h-54">
+                  <img src={assistantImage} alt="Assistant" className="w-54 h-54 object-cover rounded-full" />
                 </div>
               </div>
             )}
 
             {showWelcome && <p className="text-xs text-gray-600 px-3 font-medium text-center mx-auto mb-4 md:text-sm md:mb-5">{welcomeMessage}</p>}
 
-            <div className="flex-grow overflow-y-auto px-2 no-scrollbar">
-              {messages.map((message, index) => (
-                <div key={index} className={`flex items-start mb-2 p-2 ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
-                  {message.sender === "assistant" && (
-                    <div className="w-6 h-6 rounded-full overflow-hidden mx-2 md:w-8 md:h-8">
-                      <img src={assistantImage} alt="Assistant" className="w-full h-full object-cover" />
-                    </div>
-                  )}
-                  <div className={`max-w-[75%] rounded-lg p-2 ${message.sender === "user" ? "bg-gray-100 text-gray-900 rounded-tr-none" : "bg-black text-white rounded-tl-none"} shadow-sm relative flex flex-col items-start`}>
-                    <p className="text-xs font-medium md:text-sm">{message.text}</p>
-                    {message.image && (
-                      <div className="chat-image-container mt-2 w-16 h-28 md:w-20 md:h-32">
-                        <img src={message.image} alt="Chat Image" className="chat-image" />
+            {(messages.length > 0 || showConfirmation) && (
+              <div className="flex-grow overflow-y-auto px-4 no-scrollbar min-h-[150px]  rounded-lg mx-2 mb-2">
+                {messages.map((message, index) => (
+                  <div key={index} className={`flex items-start mb-3 p-3 ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
+                    {message.sender === "assistant" && (
+                      <div className="w-8 h-8 rounded-full overflow-hidden mx-2 md:w-10 md:h-10">
+                        <img src={assistantImage} alt="Assistant" className="w-full h-full object-cover" />
                       </div>
                     )}
-                    <div className={`absolute top-0 ${message.sender === "user" ? "-right-2 w-0 h-0 border-t-[8px] border-t-transparent border-l-[8px] border-l-gray-100 border-b-[8px] border-b-transparent" : "-left-2 w-0 h-0 border-t-[8px] border-t-transparent border-r-[8px] border-r-black border-b-[8px] border-b-transparent"}`} />
-                  </div>
-                </div>
-              ))}
-
-              {showConfirmation && (
-                <div className="flex justify-start items-start mb-2 p-2">
-                  <div className="w-6 h-6 rounded-full overflow-hidden mx-2 md:w-8 md:h-8">
-                    <img src={assistantImage} alt="Assistant" className="w-full h-full object-cover" />
-                  </div>
-                  <div className="max-w-[75%] bg-gray-100 text-gray-900 rounded-lg p-2 rounded-tl-none shadow-sm relative flex flex-col items-start">
-                    <p className="text-xs font-medium md:text-sm">Sure! Just to confirm, is this the reel you're asking about?</p>
-                    <div className="chat-image-container mt-2 w-16 h-28 md:w-20 md:h-32">
-                      <img src={confirmationImage} alt="Confirmation Reel" className="chat-image" />
+                    <div className={`max-w-[75%] rounded-lg p-3 ${message.sender === "user" ? "bg-blue-100 text-gray-900 rounded-tr-none" : "bg-gray-800 text-white rounded-tl-none"} shadow-md relative flex flex-col items-start transition-all duration-200`}>
+                      <p className="text-sm font-medium leading-relaxed md:text-base">{message.text}</p>
+                      {message.image && (
+                        <div className="chat-image-container mt-3 w-20 h-32 md:w-24 md:h-40">
+                          <img src={message.image} alt="Chat Image" className="chat-image" />
+                        </div>
+                      )}
+                      <div className={`absolute top-0 ${message.sender === "user" ? "-right-2 w-0 h-0 border-t-[10px] border-t-transparent border-l-[10px] border-l-blue-100 border-b-[10px] border-b-transparent" : "-left-2 w-0 h-0 border-t-[10px] border-t-transparent border-r-[10px] border-r-gray-800 border-b-[10px] border-b-transparent"}`} />
                     </div>
-                    <div className="flex flex-col gap-2 mt-2 w-full">
-                      <button onClick={() => handleConfirmation("yes")} className="bg-white text-black py-1 px-3 rounded-full hover:bg-gray-200 text-xs font-semibold transition-colors duration-200 md:text-sm md:px-4">
-                        Yes, that's the one
-                      </button>
-                      <button onClick={() => handleConfirmation("no")} className="bg-white text-black py-1 px-3 rounded-full hover:bg-gray-200 text-xs font-semibold transition-colors duration-200 md:text-sm md:px-4">
-                        No, show me others
-                      </button>
-                    </div>
-                    <div className="absolute top-0 -left-2 w-0 h-0 border-t-[8px] border-t-transparent border-r-[8px] border-r-gray-100 border-b-[8px] border-b-transparent" />
                   </div>
-                </div>
-              )}
+                ))}
 
-              <div ref={chatEndRef} />
-            </div>
+                {showConfirmation && (
+                  <div className="flex justify-start items-start mb-3 p-3">
+                    <div className="w-8 h-8 rounded-full overflow-hidden mx-2 md:w-10 md:h-10">
+                      <img src={assistantImage} alt="Assistant" className="w-full h-full object-cover" />
+                    </div>
+                    <div className="max-w-[75%] bg-gray-100 text-gray-900 rounded-lg p-3 rounded-tl-none shadow-md relative flex flex-col items-start">
+                      <p className="text-sm font-medium leading-relaxed md:text-base">Sure! Just to confirm, is this the reel you're asking about?</p>
+                      <div className="chat-image-container mt-3 w-20 h-32 md:w-24 md:h-40">
+                        <img src={confirmationImage} alt="Confirmation Reel" className="chat-image" />
+                      </div>
+                      <div className="flex flex-col gap-2 mt-3 w-full">
+                        <button onClick={() => handleConfirmation("yes")} className="bg-white text-black py-1.5 px-4 rounded-full hover:bg-gray-200 text-sm font-semibold transition-colors duration-200 md:text-base md:px-5">
+                          Yes, that's the one
+                        </button>
+                        <button onClick={() => handleConfirmation("no")} className="bg-white text-black py-1.5 px-4 rounded-full hover:bg-gray-200 text-sm font-semibold transition-colors duration-200 md:text-base md:px-5">
+                          No, show me others
+                        </button>
+                      </div>
+                      <div className="absolute top-0 -left-2 w-0 h-0 border-t-[10px] border-t-transparent border-r-[10px] border-r-gray-100 border-b-[10px] border-b-transparent" />
+                    </div>
+                  </div>
+                )}
+                <div ref={chatEndRef} />
+              </div>
+            )}
 
             {showPrompts && (
               <div className="space-y-2 mb-4 px-3 md:mb-6">
@@ -159,7 +160,7 @@ const ChatWidget = ({ initialHeight = "90vh", initialWidth = "90vw", assistantIm
             )}
 
             <div className="mt-auto p-3">
-              <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-2 py-1 bg-white shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200 focus-within:border-black">
+              <div className="flex items-center gap-2 border border-gray-200 rounded-lg px-2 py-2 bg-white shadow-sm hover:shadow-md hover:border-gray-300 transition-all duration-200 focus-within:border-black">
                 <input type="text" value={input} onChange={(e) => setInput(e.target.value)} onKeyPress={handleKeyPress} placeholder="Ask me anything..." className="flex-grow text-xs text-gray-900 placeholder-gray-400 placeholder:font-medium bg-transparent outline-none focus:placeholder-gray-300 transition-colors duration-150 md:text-sm" />
                 <div className="flex items-center gap-1">
                   <button className="p-1 rounded-full hover:bg-gray-100 active:bg-gray-200 transition-colors duration-200 focus:outline-none" aria-label="Voice input">

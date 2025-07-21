@@ -87,7 +87,7 @@ const ChatWidget = ({ initialHeight = "90vh", initialWidth = "90vw", assistantIm
 
             {showProfileImage && (
               <div className="relative w-full h-52 p-4 mt-1 md:h-64">
-                <div className="w-54 h-54 mx-auto border-2 border-white shadow-md overflow-hidden bg-gray-100 rounded-full md:w-54 md:h-54">
+                <div className="w-54 h-54 mx-auto border-2 border-white shadow-md overflow-hidden bg-gray-100 rounded-full md:w-48 md:h-48">
                   <img src={assistantImage} alt="Assistant" className="w-54 h-54 object-cover rounded-full" />
                 </div>
               </div>

@@ -96,11 +96,11 @@ const ChatWidget = ({ initialHeight = "90vh", initialWidth = "90vw", assistantIm
             {showWelcome && <p className="text-xs text-gray-600 px-3 font-medium text-center mx-auto mb-4 md:text-sm md:mb-5">{welcomeMessage}</p>}
 
             {(messages.length > 0 || showConfirmation) && (
-              <div className="flex-grow overflow-y-auto px-4 no-scrollbar min-h-[150px]  rounded-lg mx-2 mb-2">
+              <div className="flex-grow overflow-y-auto px-2 no-scrollbar min-h-[150px]  rounded-lg  mb-2">
                 {messages.map((message, index) => (
-                  <div key={index} className={`flex items-start mb-3 p-3 ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
+                  <div key={index} className={`flex items-start mb-3  ${message.sender === "user" ? "justify-end" : "justify-start"}`}>
                     {message.sender === "assistant" && (
-                      <div className="w-8 h-8 rounded-full overflow-hidden mx-2 md:w-10 md:h-10">
+                      <div className="w-8 h-8 rounded-full overflow-hidden  md:w-10 md:h-10">
                         <img src={assistantImage} alt="Assistant" className="w-full h-full object-cover" />
                       </div>
                     )}
@@ -117,7 +117,7 @@ const ChatWidget = ({ initialHeight = "90vh", initialWidth = "90vw", assistantIm
                 ))}
 
                 {showConfirmation && (
-                  <div className="flex justify-start items-start mb-3 p-3">
+                  <div className="flex justify-start items-start mb-3 ">
                     <div className="w-8 h-8 rounded-full overflow-hidden mx-2 md:w-10 md:h-10">
                       <img src={assistantImage} alt="Assistant" className="w-full h-full object-cover" />
                     </div>
@@ -127,10 +127,10 @@ const ChatWidget = ({ initialHeight = "90vh", initialWidth = "90vw", assistantIm
                         <img src={confirmationImage} alt="Confirmation Reel" className="chat-image" />
                       </div>
                       <div className="flex flex-col gap-2 mt-3 w-full">
-                        <button onClick={() => handleConfirmation("yes")} className="bg-white text-black py-1.5 px-4 rounded-full hover:bg-gray-200 text-sm font-semibold transition-colors duration-200 md:text-base md:px-5">
+                        <button onClick={() => handleConfirmation("yes")} className="bg-white text-black py-1.5  rounded-full hover:bg-gray-200 text-sm font-semibold transition-colors duration-200 md:text-base md:px-5">
                           Yes, that's the one
                         </button>
-                        <button onClick={() => handleConfirmation("no")} className="bg-white text-black py-1.5 px-4 rounded-full hover:bg-gray-200 text-sm font-semibold transition-colors duration-200 md:text-base md:px-5">
+                        <button onClick={() => handleConfirmation("no")} className="bg-white text-black py-1.5 rounded-full hover:bg-gray-200 text-sm font-semibold transition-colors duration-200 md:text-base md:px-5">
                           No, show me others
                         </button>
                       </div>

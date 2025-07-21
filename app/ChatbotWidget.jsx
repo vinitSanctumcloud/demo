@@ -70,15 +70,15 @@ const ChatWidget = ({ initialHeight = "90vh", initialWidth = "90vw", assistantIm
 
   return (
     <>
-      {!isWidgetVisible && (
+      {/* {!isWidgetVisible && (
         <div className="fixed bottom-4 right-4 z-50 md:bottom-6 md:right-6">
           <button onClick={() => setIsWidgetVisible(true)} className="w-24 h-24 rounded-full overflow-hidden shadow-lg border-2 border-white bg-gray-100 hover:shadow-xl transition-all duration-200 focus:outline-none md:w-20 md:h-20" aria-label="Open chat widget">
             <img src={assistantImage} alt="Assistant" className="w-full h-full object-cover" />
           </button>
         </div>
-      )}
+      )} */}
 
-      {isWidgetVisible && (
+      
         <div className="fixed bottom-4 right-4 z-40 w-[90vw] max-w-[400px] h-[80vh] max-h-[600px] md:max-w-[450px] md:max-h-[700px] lg:max-w-[500px] lg:max-h-[800px]">
           <div className="relative bg-white rounded-xl shadow-lg border border-gray-200 h-full flex flex-col">
             <button onClick={() => setIsWidgetVisible(false)} className="absolute -top-4 -right-4 p-2 rounded-full bg-gray-100 hover:bg-gray-200 active:bg-gray-300 transition-colors duration-200 focus:outline-none" aria-label="Close chat widget">
@@ -87,7 +87,7 @@ const ChatWidget = ({ initialHeight = "90vh", initialWidth = "90vw", assistantIm
 
             {showProfileImage && (
               <div className="relative w-full h-52 p-4 mt-1 md:h-64">
-                <div className="w-54 h-54 mx-auto border-2 border-white shadow-md overflow-hidden bg-gray-100 rounded-full md:w-48 md:h-48">
+                <div className="w-54 h-54 mx-auto border-2 border-white shadow-md overflow-hidden bg-gray-100 rounded-full md:w-40 md:h-40">
                   <img src={assistantImage} alt="Assistant" className="w-54 h-54 object-cover rounded-full" />
                 </div>
               </div>
@@ -223,7 +223,7 @@ const ChatWidget = ({ initialHeight = "90vh", initialWidth = "90vw", assistantIm
             }
           `}</style>
         </div>
-      )}
+    
     </>
   );
 };
